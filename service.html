@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>快递服务</title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta http-equiv="Cache-Control" name="no-store" />
+		<meta http-equiv="window-target" content="_top" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta name="HandheldFriendly" content="true" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta content="telephone=no" name="format-detection" />
+		<meta name="renderer" content="webkit">
+		<meta name="msapplication-tap-highlight" content="no">
+		<link rel="stylesheet" href="css/template.css" />
+	</head>
+
+	<body ng-app="service" class="service">
+		<header class="p5">
+		<ul>	
+			<li>
+				<img src="img/lback.png" class="vas" />
+				<span class="back">返回</span>
+			</li>
+			<li class="fr">
+				<h1>快递服务</h1>
+			</li>
+		</ul>
+		</header>
+		<section class="wrapper p5" ng-controller="servicemain">
+			<div class="flex bg1" ng-repeat="people in persons">
+				<div class="flex1 w20p">
+					<img ng-src="{{people.pic}}" class="sf"/>
+				</div>
+				<div class="flex3 tac"><p ng-bind-html="people.call"></p></div>
+				<div class="flex1 bg2 tac"><p ng-bind-html="people.tel"></p></div>
+			</div>
+			<div class="flex bg3 p5" ng-repeat="ware in wares">
+				<div class="flex2 tal">
+					<p ng-bind-html="ware.product"></p>
+				</div>
+				<div class="flex1 tar">
+					<p ng-bind-html="ware.number"></p>
+				</div>
+			</div>
+		</section>
+		<!--数据遍历时,用ng-bind来防止页面刷新时出现{{}}-->
+		<!--ng-bind-html使用时记得注入依赖模块:sanitize,提高安全性-->
+		<script src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-sanitize.min.js"></script>
+		<script type="text/javascript">
+			 (function(angular){
+		  	  "use strict";
+		    	var app=angular.module("service",["ngSanitize"]);
+				app.controller("servicemain",["$scope",function($scope){
+				  $scope.persons=[
+				  {pic:"img/sf.png",call:"李先生:123123423432",tel:"拨打"},
+				  {pic:"img/sf.png",call:"李先生:034567765436",tel:"拨打"},
+				  {pic:"img/sf.png",call:"李先生:987654987789",tel:"拨打"}
+				  ],
+				  $scope.wares=[
+				  {product:"美食娱乐",number:"99件"},
+				  {product:"悠闲活动",number:"234件"},
+				  {product:"美食娱乐",number:"23件"}
+				  ]
+				}]);
+			})(window.angular);
+		</script>
+	</body>
+
+</html>
